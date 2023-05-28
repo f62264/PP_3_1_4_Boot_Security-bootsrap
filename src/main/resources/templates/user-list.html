@@ -13,16 +13,14 @@
         <table>
             <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user : ${users}">
-                <td th:text="${user.id}"></td>
                 <td th:text="${user.username}"></td>
-                <td><a th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
-                <td><a th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>
+                <td><a th:href="@{user-update/{id}(id=${user.username})}">Edit</a></td>
+                <td><a th:href="@{user-delete/{id}(id=${user.username})}">Delete</a></td>
             </tr>
             </tbody>
         </table>

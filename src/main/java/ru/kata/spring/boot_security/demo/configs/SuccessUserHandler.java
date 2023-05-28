@@ -19,8 +19,12 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         if (roles.contains("ROLE_USER")) {
             httpServletResponse.sendRedirect("/user");
-        } else {
+        }
+        else {
             httpServletResponse.sendRedirect("/");
         }
     }
+//    Этот код перенаправляет пользователя на разные страницы в зависимости от его роли после успешной аутентификации.
+//    Если пользователь имеет роль "ROLE_USER", он будет перенаправлен на страницу "/user", в противном случае -
+//    на главную страницу приложения "/".
 }
