@@ -6,7 +6,7 @@
     <title>Create user</title>
 </head>
 <body>
-<form action="#" th:action="@{/user-create}" th:object="${user}" method="post">
+<form action="#" th:action="@{/admin/user-create}" th:object="${user}" method="post">
     <label for="username">Name</label>
     <input type="text" th:field="*{username}" id="username" placeholder="Name">
     <br>
@@ -19,7 +19,7 @@
     <br/>
     <input type="submit" value="Create User">
 
-    <form th:action="@{/user-create}" th:object="${user}" method="post">
+    <form th:action="@{/admin/user-create}" th:object="${user}" method="post">
         <p>
             <label>Roles:
                 <input type="checkbox" name="roles"
@@ -32,5 +32,7 @@
         </p>
     </form>
 </form>
+<br/>
+<a href="/logout">Logout</a>
 </body>
 </html>

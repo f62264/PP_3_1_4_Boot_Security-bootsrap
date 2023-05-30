@@ -21,9 +21,9 @@
             <tr th:each="user : ${users}">
                 <td th:text="${user.id}"></td>
                 <td th:text="${user.username}"></td>
-                <td><a th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
+                <td><a th:href="@{/admin/user-update/{id}(id=${user.id})}">Edit</a></td>
                 <td>
-                    <form th:method="DELETE" th:action="@{/user-delete/{id}(id=${user.getId()})}">
+                    <form th:method="DELETE" th:action="@{/admin/user-delete/{id}(id=${user.getId()})}">
                         <input th:type="submit" value="Delete"/>
                     </form>
                 </td>
@@ -31,7 +31,9 @@
             </tbody>
         </table>
     </div>
-    <p><a href="/user-create">Create user</a></p>
+    <p><a href="/admin/user-create">Create user</a></p>
 </div>
+<br/>
+<a href="/logout">Logout</a>
 </body>
 </html>
