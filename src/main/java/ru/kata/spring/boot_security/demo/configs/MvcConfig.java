@@ -14,4 +14,8 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/user").setViewName("user");
     }
+
+    //Этот код добавляет контроллер представлений для URL-адреса "/user",
+    // который будет отображать представление с именем "user". Таким образом,
+    // при переходе по URL-адресу "/user" будет отображаться страница с содержимым из файла "user.html"
 }

@@ -5,6 +5,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -19,12 +20,11 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         if (roles.contains("ROLE_USER")) {
             httpServletResponse.sendRedirect("/user");
-        }
-        else {
+        } else {
             httpServletResponse.sendRedirect("/");
         }
     }
+}
 //    Этот код перенаправляет пользователя на разные страницы в зависимости от его роли после успешной аутентификации.
 //    Если пользователь имеет роль "ROLE_USER", он будет перенаправлен на страницу "/user", в противном случае -
 //    на главную страницу приложения "/".
-}
