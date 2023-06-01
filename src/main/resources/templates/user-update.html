@@ -16,6 +16,21 @@
     <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name error</div>
     <br/>
     <input type="submit" value="Update!"/>
+    <br/>
+    <form th:action="@{/admin/user-create}" th:object="${user}" method="post">
+        <p>
+            <label>Roles:
+                <input th:type="checkbox" name="roles"
+                       th:each="role : ${roles}"
+                       th:text="${role.getName()}"
+                       th:value="${role.getId()}"
+                       th:field="*{roles}"
+                       th:required="${role.getId() == 1}"
+                />
+            </label>
+        </p>
+    </form>
+</form>
 </form>
 <br/>
 <a href="/logout">Logout</a>

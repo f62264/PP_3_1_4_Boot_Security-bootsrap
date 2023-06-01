@@ -22,11 +22,12 @@
     <form th:action="@{/admin/user-create}" th:object="${user}" method="post">
         <p>
             <label>Roles:
-                <input type="checkbox" name="roles"
-                       th:each="role : ${allRoles}"
-                       th:text="${role.name}"
-                       th:value="${role.id}"
+                <input th:type="checkbox" name="roles"
+                       th:each="role : ${roles}"
+                       th:text="${role.getName()}"
+                       th:value="${role.getId()}"
                        th:field="*{roles}"
+                       th:required="${role.getId() == 1}"
                 />
             </label>
         </p>

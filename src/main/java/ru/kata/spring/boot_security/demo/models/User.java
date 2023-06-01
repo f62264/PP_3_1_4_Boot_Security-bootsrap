@@ -18,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints= @UniqueConstraint(columnNames={"username"}))
 @NamedEntityGraph(name = "User.roles", attributeNodes = @NamedAttributeNode("roles"))
 public class User implements UserDetails {
 
@@ -37,16 +38,17 @@ public class User implements UserDetails {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username", unique = true)
+    @Column(name = "username")
     @NotEmpty(message = "Name can't be empty")
     @Size(min = 2, max = 30, message = "Name size to be between 2 and 30 characters")
     private String username;
 
     @Column(name = "password")
-    @NotEmpty(message = "Name can't be empty")
+    @NotEmpty(message = "Password can't be empty")
     @Size(min = 2, max = 30, message = "Name size to be between 2 and 30 characters")
     private String password;
 
+    @NotEmpty(message = "Role can't be empty")
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),

@@ -13,18 +13,15 @@ import java.util.Set;
 
 @Component
 public class SuccessUserHandler implements AuthenticationSuccessHandler {
-    // Spring Security использует объект Authentication, пользователя авторизованной сессии.
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                                         Authentication authentication) throws IOException {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-        if (roles.contains("ADMIN")) {
+        if (roles.contains("ROLE_ADMIN")) {
             httpServletResponse.sendRedirect("/admin/users");
         } else {
             httpServletResponse.sendRedirect("/user");
         }
     }
 }
-//    Этот код перенаправляет пользователя на разные страницы в зависимости от его роли после успешной аутентификации.
-//    Если пользователь имеет роль "ROLE_USER", он будет перенаправлен на страницу "/user", в противном случае -
-//    на главную страницу приложения "/".
