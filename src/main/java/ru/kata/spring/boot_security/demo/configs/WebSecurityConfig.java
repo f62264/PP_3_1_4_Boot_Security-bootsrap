@@ -18,10 +18,10 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserService userService;
+//    private final UserService userService;
 //    private UserDetailsService userDetailsService;
 
-//    private MyUserDetailService myUserDetailService;
+    private MyUserDetailService myUserDetailService;
 
     private final SuccessUserHandler successUserHandler;
 
@@ -30,8 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        this.successUserHandler = successUserHandler;
 //    }
     @Autowired
-    public WebSecurityConfig(UserService userService, SuccessUserHandler successUserHandler) {
-        this.userService = userService;
+    public WebSecurityConfig(MyUserDetailService myUserDetailService, SuccessUserHandler successUserHandler) {
+        this.myUserDetailService = myUserDetailService;
         this.successUserHandler = successUserHandler;
     }
 
@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService);
+        auth.userDetailsService(myUserDetailService);
     }
 
     //    @Bean
