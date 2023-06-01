@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.models;
 
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.CascadeType;
@@ -21,15 +20,11 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "users", uniqueConstraints= @UniqueConstraint(columnNames={"username"}))
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"username"}))
 @NamedEntityGraph(name = "User.roles", attributeNodes = @NamedAttributeNode("roles"))
 public class User implements UserDetails {
 
@@ -45,10 +40,9 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     @NotEmpty(message = "Password can't be empty")
-    @Size(min = 2, max = 30, message = "Name size to be between 2 and 30 characters")
+    @Size(min = 2, max = 255, message = "Name size to be between 2 and 255 characters")
     private String password;
 
-    @NotEmpty(message = "Role can't be empty")
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),

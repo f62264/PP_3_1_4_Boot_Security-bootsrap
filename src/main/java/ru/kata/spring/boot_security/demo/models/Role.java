@@ -67,7 +67,7 @@ public class Role implements GrantedAuthority {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        Role other  = (Role) obj;
+        Role other = (Role) obj;
         if (id == null) {
             if (other.id != null)
                 return false;

@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.repositories;
 
 
-import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

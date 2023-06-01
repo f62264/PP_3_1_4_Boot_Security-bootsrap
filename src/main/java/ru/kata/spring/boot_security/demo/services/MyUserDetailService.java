@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.services;
 
-import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +12,7 @@ import javax.transaction.Transactional;
 
 @Service
 public class MyUserDetailService implements UserDetailsService {
+
     private final UserRepository userRepository;
 
     @Autowired
@@ -29,5 +29,4 @@ public class MyUserDetailService implements UserDetailsService {
         }
         return user;
     }
-
 }
