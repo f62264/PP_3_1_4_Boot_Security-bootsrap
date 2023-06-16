@@ -65,7 +65,7 @@ public class UserController {
     public String update(@ModelAttribute("user") User user, @RequestParam("EditListRoles") ArrayList<Long> roles) {
         Set<Role> userRoles = new HashSet<>(roleRepository.findAllById(roles));
         user.setRoles(userRoles);
-        userService.saveUser(user);
+        userService.updateUser(user);
         return "redirect:/admin/users";
     }
 
