@@ -44,6 +44,7 @@ public class UserController {
         model.addAttribute("authentication", authentication);
         model.addAttribute("users", users);
         model.addAttribute("roles", roleRepository.findAll());
+        model.addAttribute("password", roleRepository.findAll());
         return "user-list-bs";
     }
 
