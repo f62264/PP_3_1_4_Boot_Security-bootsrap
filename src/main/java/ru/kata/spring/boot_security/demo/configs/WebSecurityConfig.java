@@ -15,7 +15,7 @@ import ru.kata.spring.boot_security.demo.services.MyUserDetailService;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 
     private MyUserDetailService myUserDetailService;
 
@@ -32,7 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/index").permitAll()
-                .antMatchers("/admin/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/user").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
                 .and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/process_login")
                 .failureUrl("/login?error")

@@ -46,6 +46,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public User updateUser(User user) {
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new UsernameDuplicateException("Логин уже занят. Пожалуйста, выберите другой логин.");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }

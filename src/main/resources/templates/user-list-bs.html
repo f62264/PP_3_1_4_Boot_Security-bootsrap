@@ -15,7 +15,7 @@
 <div>
     <!--HEADER-->
     <header class="container-fluid d-flex flex-row align-items-center justify-content-between p-3 bg-dark text-white">
-        <div><b th:text="${authentication.getName()}"/> with roles:
+        <div><b th:text="${user.getEmail()}"/> with roles:
             <span th:each="role : ${user.roles}" th:text="${role.getName()} + ' '"></span>
         </div>
         <div><a class="text-decoration-none font-weight-bold text-secondary" th:href="@{/logout}">Logout</a></div>
@@ -39,7 +39,7 @@
                 </ul>
             </div>
             <!--вкладка АДМИН панель включающая тиблицу юзеров и вклада новый юзер-->
-            <div class="tab-content col-10 px-0 pt-3">
+            <div class="tab-content col-10 px-0 pt-3 vh-100 bg-light">
                 <div sec:authorize="hasAuthority('ADMIN')"
                      th:classappend="${#authorization.expression('hasAuthority(''ADMIN'')') ? 'show active' : ''}"
                      class="tab-pane" role="tabpanel " id="admin" aria-labelledby="admin-tab">
@@ -72,6 +72,7 @@
                                         <tr>
                                             <th scope="col">Id</th>
                                             <th scope="col">Username</th>
+                                            <th scope="col">Email</th>
                                             <th scope="col">Role</th>
                                             <th scope="col">Edit</th>
                                             <th scope="col">Delete</th>
@@ -81,6 +82,8 @@
                                         <tr th:each="user : ${users}">
                                             <td th:text="${user.id}"></td>
                                             <td th:text="${user.username}"></td>
+                                            <td th:text="${user.email}"></td>
+
                                             <td>
                                                 <th:block th:each="role: ${user.roles}"
                                                           th:text="${role.getName()} + ' '"/>
@@ -105,7 +108,7 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="EditModalLabel">Delete
+                                                            <h1 class="modal-title fs-5" id="EditModalLabel">Edit
                                                                 user</h1>
                                                             <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close">
@@ -121,10 +124,16 @@
                                                                            class="form-control" id="idEdit"
                                                                            th:value="${user.getId()}" disabled/>
                                                                     <br>
-                                                                    <label for="EditUsername"><b>Username</b></label>
+                                                                    <label for="EditEmail"><b>Username</b></label>
+                                                                    <input th:name="username" th:type="text"
+                                                                           class="form-control" id="EditEmail"
+                                                                           th:value="${user.username}"/>
+                                                                    <br>
+
+                                                                    <label for="EditEmail"><b>Email</b></label>
                                                                     <input th:name="username" th:type="text"
                                                                            class="form-control" id="EditUsername"
-                                                                           th:value="${user.username}"/>
+                                                                           th:value="${user.email}"/>
                                                                     <br>
 
                                                                     <label for="EditPassword"><b>Password</b></label>
@@ -179,12 +188,18 @@
                                                                            class="form-control" id="idDelete"
                                                                            th:value="${user.getId()}" disabled/>
                                                                     <br>
+
                                                                     <label for="EditPassword"><b>Username</b></label>
                                                                     <input th:name="username" th:type="text"
                                                                            class="form-control" id="username1"
                                                                            th:value="${user.username}" disabled/>
                                                                     <br>
 
+                                                                    <label for="idEdit"><b>Email</b></label>
+                                                                    <input th:name="email" th:type="text"
+                                                                           class="form-control" id="email"
+                                                                           th:value="${user.getEmail()}" disabled/>
+                                                                    <br>
                                                                     <label for="rolesEdit"><b>Role</b></label>
                                                                     <select multiple
                                                                             class="form-control form-control-sm"
@@ -235,10 +250,20 @@
                                                                 <label for="username" class="form-label px-2">
                                                                     <h6>Username</h6>
                                                                 </label>
-                                                                <input type="username" class="form-control"
-                                                                       id="username" name="username">
+                                                                <input type="username" class="form-control" id="username" name="username">
                                                             </div>
                                                         </div>
+
+                                                        <div class="col-4 px-2 pt-4 text-center ">
+                                                            <div class="mb-3">
+                                                                <label for="emailNewUser" class="form-label px-2">
+                                                                    <h6>Email</h6>
+                                                                </label>
+                                                                <input type="email" class="form-control" id="emailNewUser" name="email">
+                                                            </div>
+                                                        </div>
+
+
                                                     </div>
                                                     <div class="d-flex flex-column align-items-center">
                                                         <div class="col-4 px-2 pt-4 text-center">
@@ -298,12 +323,14 @@
                                 <tr>
                                     <th scope="col">Id</th>
                                     <th scope="col">Username</th>
+                                    <th scope="col">Email</th>
                                     <th scope="col">Role</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <td th:text="${user.id}"></td>
                                 <td th:text="${user.username}"></td>
+                                <td th:text="${user.email}"></td>
                                 <td>
                                     <th:block th:each="role: ${user.roles}" th:text="${role.getName()} + ' '">
                                     </th:block>
